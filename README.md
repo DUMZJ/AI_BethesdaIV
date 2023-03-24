@@ -1,6 +1,5 @@
 # AI_BethesdaIV
 AI Diagnosis of Bethesda category IV thyroid nodules 
-## Overall design of the study
 
 ## The code for model training
 * st_training.py corresponds to swin-transformer  
