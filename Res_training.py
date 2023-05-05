@@ -5,7 +5,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, datasets
 from resnet import resnet50
 
-# 定义超参数
+# define the parameters
 batch_size = 32
 num_classes = 3
 num_epochs = 10
