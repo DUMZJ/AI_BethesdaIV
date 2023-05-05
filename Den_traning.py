@@ -5,13 +5,13 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, datasets
 from densenet import densenet121
 
-# 定义超参数
+# Define hyperparameter
 batch_size = 32
 num_classes = 3
 num_epochs = 10
 learning_rate = 0.001
 
-# 定义数据集和数据转换
+# Defining Datasets and Data Transformations
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
@@ -21,27 +21,27 @@ transform = transforms.Compose([
 train_dataset = datasets.ImageFolder(root='path/to/train/data', transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
-# 定义模型、优化器和损失函数
+# Define the model, optimizer, and loss function
 model = densenet121(num_classes=num_classes)
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 criterion = nn.CrossEntropyLoss()
 
-# 训练模型
+# Training model
 for epoch in range(num_epochs):
     for i, (images, labels) in enumerate(train_loader):
-        # 前向传播
+        # Forward propagation
         outputs = model(images)
         loss = criterion(outputs, labels)
 
-        # 反向传播和优化
+        # Backpropagation and optimization
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
 
-        # 打印统计信息
+        # Print Statistics
         if (i+1) % 100 == 0:
             print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}'
                   .format(epoch+1, num_epochs, i+1, len(train_loader), loss.item()))
 
-# 保存模型
+# Save a model
 torch.save(model.state_dict(), 'densenet121.ckpt')
